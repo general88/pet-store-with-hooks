@@ -1,23 +1,35 @@
 import React from "react";
-import NavBar from "./assets/components/NavBar";
-import PetList from "./assets/components/PetList";
-import Filter from "./assets/components/Filter";
-import { usePetFilter } from "./hooks/usePetFilter";
+import MarketPlace from "./pages/marketplace/MarketPlace";
+import Home from "./pages/Home";
+import {Routes, Route  } from "react-router-dom";
+import About from "./pages/About";
+import MainLayout from "./layout/MainLayout";
+import MarketPlaceLayout from "./layout/MarketPlaceLayout";
+import Reviews from "./pages/marketplace/Reviews";
+import PetDetails from "./pages/marketplace/PetDetails";
+
 
 function App() {
-  const [filterState, setFilterState] = React.useState({
-    value: "",
-    filterType: "",
-  });
-
-  const { pets } = usePetFilter(filterState.value, filterState.filterType);
-
+  
   return (
-    <>
-      <NavBar />
-      <Filter setFilterState={setFilterState} />
-      <PetList pets={pets} />
-    </>
+    <React.Fragment>
+    
+      <Routes>
+        <Route path="/" element={<MainLayout/>} >
+                <Route index element={<Home/>} />    
+                    <Route path="/marketplace" element={<MarketPlaceLayout/>}>
+                        <Route index element={<MarketPlace />} />
+                        <Route path=":petID" element={<PetDetails />} />
+                        <Route path="reviews" element={<Reviews />} />
+                </Route>
+        </Route>
+
+      <Route path="/about" element={<About/>} />
+
+
+      </Routes>
+    </React.Fragment>
+  
   );
 }
 

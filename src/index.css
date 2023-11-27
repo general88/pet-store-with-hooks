@@ -7,3 +7,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.active{
+  font-size: 2rem;
+}
